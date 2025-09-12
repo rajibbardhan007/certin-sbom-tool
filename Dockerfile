@@ -1,18 +1,14 @@
-# Use official Python 3.13 slim image as base
 FROM python:3.13-slim
 
-# Set environment variables
 ENV PYTHONUNBUFFERED=1
 ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Set working directory
 WORKDIR /app
 
-# Copy requirements file first to leverage Docker caching
 COPY requirements.txt .
 
-# Install system dependencies (for WeasyPrint, curl, unzip, Java for Dependency-Check)
+# Install system packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev \
@@ -33,14 +29,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Create virtual environment
+# Create Python virtual environment
 RUN python3 -m venv $VIRTUAL_ENV
 
-# Upgrade pip and install Python dependencies
+# Upgrade pip and install Python packages
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Grype (for SBOM vulnerability scanning)
+# Install Grype (correct way)
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
 # Install OWASP Dependency-Check
@@ -51,14 +47,11 @@ RUN LATEST_VERSION=$(curl -s https://api.github.com/repos/jeremylong/DependencyC
     && ln -sf /opt/dependency-check/bin/dependency-check.sh /usr/local/bin/dependency-check.sh \
     && rm dependency-check-${LATEST_VERSION:1}-release.zip
 
-# Copy the application code
+# Copy application code
 COPY . .
 
-# Expose port for Flask app
 EXPOSE 5000
 
-# Create necessary directories
 RUN mkdir -p static/uploads static/reports templates
 
-# Set entrypoint
 CMD ["bash", "-c", "source /opt/venv/bin/activate && python app.py"]
