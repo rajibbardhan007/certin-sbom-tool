@@ -30,3 +30,8 @@ secrets.json
 node_modules/
 dist/
 build/
+
+# Keys / sensitive
+sbom
+*.key
+*.pem
