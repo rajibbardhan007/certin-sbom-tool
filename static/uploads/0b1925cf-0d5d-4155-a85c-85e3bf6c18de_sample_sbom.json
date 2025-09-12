@@ -1,0 +1,55 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "version": 1,
+  "components": [
+    {
+      "type": "library",
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "description": "Apache Log4j Core",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a1e4e5c71c693394a419844a6e5e5f0f3b4f5e6d7c8a9b0c1d2e3f4a5b6c7d8e9"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "name": "Apache License 2.0"
+          }
+        }
+      ],
+      "supplier": {
+        "name": "Apache Software Foundation"
+      }
+    },
+    {
+      "type": "library",
+      "name": "spring-core",
+      "version": "5.3.18",
+      "description": "Spring Framework Core",
+      "purl": "pkg:maven/org.springframework/spring-core@5.3.18",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b2e4e5c71c693394a419844a6e5e5f0f3b4f5e6d7c8a9b0c1d2e3f4a5b6c7d8e9"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "name": "Apache License 2.0"
+          }
+        }
+      ],
+      "supplier": {
+        "name": "Spring.io"
+      }
+    }
+  ]
+}

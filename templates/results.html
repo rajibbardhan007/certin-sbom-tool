@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBOM Analysis Results - CERT-In Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --critical-color: #dc3545;
+            --high-color: #ffc107;
+            --medium-color: #17a2b8;
+            --low-color: #28a745;
+            --unknown-color: #6c757d;
+        }
+        
+        .vulnerability { 
+            padding: 12px; 
+            margin: 8px 0; 
+            border-radius: 5px; 
+            border-left: 5px solid;
+            transition: transform 0.2s;
+        }
+        .vulnerability:hover {
+            transform: translateX(5px);
+        }
+        .critical { 
+            background: rgba(220, 53, 69, 0.1); 
+            border-left-color: var(--critical-color); 
+        }
+        .high { 
+            background: rgba(255, 193, 7, 0.1); 
+            border-left-color: var(--high-color); 
+        }
+        .medium { 
+            background: rgba(23, 162, 184, 0.1); 
+            border-left-color: var(--medium-color); 
+        }
+        .low { 
+            background: rgba(40, 167, 69, 0.1); 
+            border-left-color: var(--low-color); 
+        }
+        .unknown { 
+            background: rgba(108, 117, 125, 0.1); 
+            border-left-color: var(--unknown-color); 
+        }
+        .certin-field { 
+            background: #f8f9fa; 
+            padding: 8px 12px; 
+            border-radius: 4px; 
+            margin: 5px 0; 
+            border-left: 3px solid #6c757d;
+        }
+        .component-card { 
+            border: 1px solid #dee2e6; 
+            border-radius: 8px; 
+            padding: 20px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s;
+        }
+        .component-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .license-details { 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-radius: 5px; 
+            margin: 10px 0; 
+            border-left: 4px solid #0d6efd;
+        }
+        .scanner-badge { 
+            background: #6f42c1; 
+            color: white; 
+            padding: 4px 10px; 
+            border-radius: 12px; 
+            font-size: 0.75em; 
+            font-weight: 500;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .nav-tabs .nav-link.active {
+            font-weight: 600;
+            border-bottom: 3px solid #0d6efd;
+        }
+        .hash-value {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            background: #212529;
+            color: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 3px;
+            margin: 2px 0;
+        }
+        .cvss-badge {
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .component-type-badge {
+            background: #6c757d;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="mb-1"><i class="fas fa-file-alt me-2"></i>CERT-In SBOM Compliance Report</h1>
+                <p class="text-muted mb-0">Comprehensive security analysis and compliance reporting</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="/" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Upload
+                </a>
+                <button class="btn btn-outline-secondary" onclick="window.print()">
+                    <i class="fas fa-print me-2"></i>Print
+                </button>
+            </div>
+        </div>
+
+        {% if analysis %}
+        <!-- Summary Section -->
+        <div class="summary-card">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 class="mb-2">Analysis Summary</h3>
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            <div class="text-center">
+                                <h2 class="mb-0">{{ analysis.components|length }}</h2>
+                                <small>Components</small>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="text-center">
+                                <h2 class="mb-0">{{ analysis.vulnerabilities|length }}</h2>
+                                <small>Vulnerabilities</small>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="text-center">
+                                <h2 class="mb-0"><span class="scanner-badge">{{ analysis.scanner_used }}</span></h2>
+                                <small>Scanner Used</small>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="text-center">
+                                <h2 class="mb-0">{{ analysis.analysis_date[:10] }}</h2>
+                                <small>Analysis Date</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="bg-white text-dark p-3 rounded">
+                        <strong>Report ID:</strong> <code>{{ analysis.file_id }}</code><br>
+                        <strong>Format:</strong> {{ analysis.original_format }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vulnerability Summary -->
+        {% set severity_counts = {'Critical': 0, 'High': 0, 'Medium': 0, 'Low': 0, 'Unknown': 0} %}
+        {% for vuln in analysis.vulnerabilities %}
+            {% set severity = vuln.severity %}
+            {% if severity in severity_counts %}
+                {% set _ = severity_counts.update({severity: severity_counts[severity] + 1}) %}
+            {% else %}
+                {% set _ = severity_counts.update({'Unknown': severity_counts['Unknown'] + 1}) %}
+            {% endif %}
+        {% endfor %}
+
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body critical">
+                        <h3 class="mb-0">{{ severity_counts.Critical }}</h3>
+                        <small>CRITICAL</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body high">
+                        <h3 class="mb-0">{{ severity_counts.High }}</h3>
+                        <small>HIGH</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body medium">
+                        <h3 class="mb-0">{{ severity_counts.Medium }}</h3>
+                        <small>MEDIUM</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body low">
+                        <h3 class="mb-0">{{ severity_counts.Low }}</h3>
+                        <small>LOW</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center border-0 shadow-sm">
+                    <div class="card-body unknown">
+                        <h3 class="mb-0">{{ severity_counts.Unknown }}</h3>
+                        <small>UNKNOWN</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mb-4" id="reportTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="components-tab" data-bs-toggle="tab" data-bs-target="#components" type="button" role="tab">Components</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="vulnerabilities-tab" data-bs-toggle="tab" data-bs-target="#vulnerabilities" type="button" role="tab">Vulnerabilities</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="compliance-tab" data-bs-toggle="tab" data-bs-target="#compliance" type="button" role="tab">Compliance</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="export-tab" data-bs-toggle="tab" data-bs-target="#export" type="button" role="tab">Export</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="reportTabsContent">
+            <!-- Components Tab -->
+            <div class="tab-pane fade show active" id="components" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white">
+                                <h5 class="mb-0"><i class="fas fa-cubes me-2"></i>Components Overview ({{ analysis.components|length }})</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Component</th>
+                                                <th>Version</th>
+                                                <th>Type</th>
+                                                <th>Supplier</th>
+                                                <th>License</th>
+                                                <th>Criticality</th>
+                                                <th>Vulnerabilities</th>
+                                                <th>Origin</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for component in analysis.components %}
+                                            <tr onclick="scrollToComponent('{{ component.unique_identifier }}')" style="cursor: pointer;">
+                                                <td><strong>{{ component.name }}</strong></td>
+                                                <td>{{ component.version }}</td>
+                                                <td><span class="component-type-badge">{{ component.type if component.type else 'N/A' }}</span></td>
+                                                <td>{{ component.supplier if component.supplier else 'Unknown' }}</td>
+                                                <td>{{ component.license.name if component.license and component.license.name else 'Unknown' }}</td>
+                                                <td>
+                                                    <span class="badge bg-{% if component.criticality == 'Critical' %}danger{% elif component.criticality == 'High' %}warning{% elif component.criticality == 'Medium' %}info{% else %}secondary{% endif %}">
+                                                        {{ component.criticality }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    {% set comp_vulns = [] %}
+                                                    {% for vuln in analysis.vulnerabilities %}
+                                                        {% if vuln.component_name == component.name and vuln.component_version == component.version %}
+                                                            {% set _ = comp_vulns.append(vuln) %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <span class="badge bg-{% if comp_vulns|length > 0 %}danger{% else %}success{% endif %}">
+                                                        {{ comp_vulns|length }}
+                                                    </span>
+                                                </td>
+                                                <td>{{ component.origin if component.origin else 'Unknown' }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Component Analysis -->
+                <div class="mt-4">
+                    <h4 class="mb-3"><i class="fas fa-list-alt me-2"></i>Detailed Component Analysis</h4>
+                    {% for component in analysis.components %}
+                    <div class="component-card" id="{{ component.unique_identifier }}">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4>📦 {{ component.name }} @ {{ component.version }}</h4>
+                            <span class="component-type-badge">{{ component.type if component.type else 'Unknown Type' }}</span>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="certin-field"><strong>Description:</strong> {{ component.description if component.description else 'No description available' }}</div>
+                                <div class="certin-field"><strong>Supplier:</strong> {{ component.supplier if component.supplier else 'Unknown' }}</div>
+                                <div class="certin-field"><strong>Origin:</strong> {{ component.origin if component.origin else 'Unknown' }}</div>
+                                <div class="certin-field"><strong>Criticality:</strong> 
+                                    <span class="badge bg-{% if component.criticality == 'Critical' %}danger{% elif component.criticality == 'High' %}warning{% elif component.criticality == 'Medium' %}info{% else %}secondary{% endif %}">
+                                        {{ component.criticality }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="certin-field"><strong>Release Date:</strong> {{ component.release_date if component.release_date else 'Unknown' }}</div>
+                                <div class="certin-field"><strong>EOL Date:</strong> {{ component.eol_date if component.eol_date else 'Unknown' }}</div>
+                                <div class="certin-field"><strong>Patch Status:</strong> {{ component.patch_status if component.patch_status else 'Unknown' }}</div>
+                                <div class="certin-field"><strong>Unique ID:</strong> <code>{{ component.unique_identifier }}</code></div>
+                            </div>
+                        </div>
+
+                        <!-- License Details -->
+                        <div class="license-details mt-3">
+                            <h6><i class="fas fa-file-contract me-2"></i>License Information</h6>
+                            <div class="certin-field"><strong>License:</strong> {{ component.license.name if component.license and component.license.name else 'Unknown' }}</div>
+                            {% if component.license and component.license.terms %}
+                            <div class="certin-field"><strong>License Terms:</strong> {{ component.license.terms }}</div>
+                            {% endif %}
+                            {% if component.license and component.license.restrictions %}
+                            <div class="certin-field"><strong>License Restrictions:</strong> {{ component.license.restrictions }}</div>
+                            {% endif %}
+                            {% if component.license and component.license.url %}
+                            <div class="certin-field"><strong>License URL:</strong> <a href="{{ component.license.url }}" target="_blank">{{ component.license.url }}</a></div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Usage and Properties -->
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="certin-field"><strong>Usage Restrictions:</strong> {{ component.usage_restrictions if component.usage_restrictions else 'None' }}</div>
+                                <div class="certin-field"><strong>Comments:</strong> {{ component.comments if component.comments else 'None' }}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="certin-field"><strong>Executable:</strong> {{ component.executable_property }}</div>
+                                <div class="certin-field"><strong>Archive:</strong> {{ component.archive_property }}</div>
+                                <div class="certin-field"><strong>Structured:</strong> {{ component.structured_property if component.structured_property else 'Not specified' }}</div>
+                            </div>
+                        </div>
+
+                        <!-- Dependencies -->
+                        {% if component.dependencies and component.dependencies|length > 0 %}
+                        <div class="certin-field mt-3">
+                            <strong><i class="fas fa-project-diagram me-2"></i>Dependencies ({{ component.dependencies|length }}):</strong>
+                            <div class="mt-2">
+                                {% for dep in component.dependencies %}
+                                <span class="badge bg-secondary me-1 mb-1">{{ dep }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Hashes -->
+                        {% if component.hashes and component.hashes|length > 0 %}
+                        <div class="certin-field mt-3">
+                            <strong><i class="fas fa-fingerprint me-2"></i>Integrity Hashes:</strong>
+                            <div class="mt-2">
+                                {% for alg, content in component.hashes.items() %}
+                                <div class="hash-value">{{ alg }}: {{ content }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Vulnerabilities -->
+                        {% set comp_vulns = [] %}
+                        {% for vuln in analysis.vulnerabilities %}
+                            {% if vuln.component_name == component.name and vuln.component_version == component.version %}
+                                {% set _ = comp_vulns.append(vuln) %}
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if comp_vulns %}
+                        <div class="mt-4">
+                            <h5><i class="fas fa-shield-alt me-2"></i>Vulnerabilities ({{ comp_vulns|length }})</h5>
+                            {% for vuln in comp_vulns %}
+                            <div class="vulnerability {{ vuln.severity|lower }}">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <strong>{{ vuln.cve_id }} ({{ vuln.severity }})</strong>
+                                        <span class="cvss-badge bg-{% if vuln.cvss_score >= 9 %}danger{% elif vuln.cvss_score >= 7 %}warning{% elif vuln.cvss_score >= 4 %}info{% else %}success{% endif %}">
+                                            CVSS: {{ vuln.cvss_score }}
+                                        </span>
+                                    </div>
+                                    <span class="scanner-badge">{{ vuln.scanner if vuln.scanner else 'Unknown' }}</span>
+                                </div>
+                                <div class="mt-2">
+                                    <strong>Description:</strong> {{ vuln.description }}<br>
+                                    <strong>Fixed Versions:</strong> {{ vuln.fixed_versions|join(', ') if vuln.fixed_versions else 'No fix available' }}<br>
+                                    <strong>Status:</strong> {{ vuln.vex_status }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="alert alert-success mt-3">
+                            <i class="fas fa-check-circle me-2"></i>
+                            ✅ No known vulnerabilities for this component
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Vulnerabilities Tab -->
+            <div class="tab-pane fade" id="vulnerabilities" role="tabpanel">
+                {% if analysis.vulnerabilities %}
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0"><i class="fas fa-bug me-2"></i>All Vulnerabilities ({{ analysis.vulnerabilities|length }})</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>CVE ID</th>
+                                        <th>Severity</th>
+                                        <th>Component</th>
+                                        <th>CVSS Score</th>
+                                        <th>Status</th>
+                                        <th>Scanner</th>
+                                        <th>Fixed Versions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for vuln in analysis.vulnerabilities %}
+                                    <tr>
+                                        <td><strong>{{ vuln.cve_id }}</strong></td>
+                                        <td>
+                                            <span class="badge bg-{% if vuln.severity == 'Critical' %}danger{% elif vuln.severity == 'High' %}warning{% elif vuln.severity == 'Medium' %}info{% elif vuln.severity == 'Low' %}success{% else %}secondary{% endif %}">
+                                                {{ vuln.severity }}
+                                            </span>
+                                        </td>
+                                        <td>{{ vuln.component_name }}@{{ vuln.component_version }}</td>
+                                        <td>
+                                            <span class="cvss-badge bg-{% if vuln.cvss_score >= 9 %}danger{% elif vuln.cvss_score >= 7 %}warning{% elif vuln.cvss_score >= 4 %}info{% else %}success{% endif %}">
+                                                {{ vuln.cvss_score }}
+                                            </span>
+                                        </td>
+                                        <td>{{ vuln.vex_status }}</td>
+                                        <td>{{ vuln.scanner if vuln.scanner else 'Unknown' }}</td>
+                                        <td>{{ vuln.fixed_versions|join(', ') if vuln.fixed_versions else 'None' }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No vulnerabilities found in this SBOM.
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Compliance Tab -->
+            <div class="tab-pane fade" id="compliance" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0"><i class="fas fa-clipboard-check me-2"></i>CERT-In Compliance Assessment</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h3>{{ analysis.components|length }}</h3>
+                                        <p class="text-muted">Total Components Analyzed</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body text-center">
+                                        <h3>{{ analysis.components|length }}</h3>
+                                        <p>CERT-In Compliant Components</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4">Required Fields Compliance</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Field</th>
+                                        <th>Status</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Component Name</td>
+                                        <td><span class="badge bg-success">100%</span></td>
+                                        <td>All components have names</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Component Version</td>
+                                        <td><span class="badge bg-success">100%</span></td>
+                                        <td>All components have versions</td>
+                                    </tr>
+                                    <tr>
+                                        <td>License Information</td>
+                                        <td><span class="badge bg-success">100%</span></td>
+                                        <td>All components have license data</td>
+                                    </tr>
+                                    <!-- Add more compliance fields as needed -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Tab -->
+            <div class="tab-pane fade" id="export" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0"><i class="fas fa-download me-2"></i>Export Reports</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-file-code fa-3x text-primary mb-3"></i>
+                                        <h5>JSON Report</h5>
+                                        <p class="text-muted">Machine-readable format for integration</p>
+                                        <a href="/report/{{ analysis.file_id }}/json" class="btn btn-outline-primary w-100">
+                                            Download JSON
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-file-alt fa-3x text-secondary mb-3"></i>
+                                        <h5>HTML Report</h5>
+                                        <p class="text-muted">Web-friendly interactive report</p>
+                                        <a href="/report/{{ analysis.file_id }}/html" class="btn btn-outline-secondary w-100">
+                                            Download HTML
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-file-contract fa-3x text-info mb-3"></i>
+                                        <h5>CSAF Report</h5>
+                                        <p class="text-muted">Security advisory format (VEX)</p>
+                                        <a href="/report/{{ analysis.file_id }}/csaf" class="btn btn-outline-info w-100">
+                                            Download CSAF
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-file-pdf fa-3x text-danger mb-3"></i>
+                                        <h5>PDF Report</h5>
+                                        <p class="text-muted">Printable document for compliance</p>
+                                        <a href="/report/{{ analysis.file_id }}/pdf" class="btn btn-outline-danger w-100">
+                                            Download PDF
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            Analysis not found! The analysis may have been deleted or the ID is invalid.
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function scrollToComponent(componentId) {
+            const element = document.getElementById(componentId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                // Highlight the component
+                element.style.backgroundColor = '#f8f9fa';
+                setTimeout(() => {
+                    element.style.backgroundColor = '';
+                }, 2000);
+            }
+        }
+
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# Grype configuration for CERT-In SBOM Tool
+check-for-app-update: false
+db:
+  auto-update: true
+  ca-cert: ""
+  update-url: "https://toolbox-data.anchore.io/grype/databases/"
+  max-allowed-built-age: "336h" # 2 weeks
+log:
+  level: "warn"
+  structured: false
+  file: ""
+output: "json"
+scope: "Squashed"
+file: ""
+only-fixed: false
+only-notfixed: false
+add-cpes-if-none: true
+by-cve: false
+source:
+  name: ""
+  version: ""
+  type: ""
+  registry: ""
+platform: ""
+exclude:
+  - path: "**/test/**"
+  - path: "**/tests/**"
+  - path: "**/node_modules/**"
+  - path: "**/vendor/**"
+  - path: "**/.*/**"

@@ -1,0 +1,232 @@
+{
+  "analysis_id": "0cd7d052-41c6-45c9-9c35-8a1cd898a43d",
+  "date": "2025-09-10T17:41:45.324429",
+  "format": "CycloneDX",
+  "scanner_used": "g, ,,  , ,, ,,  ,  , ,,  , r, ,,  , ,, ,,  ,  , ,,  , y, ,,  , ,, ,,  ,  , ,,  , p, ,,  , ,, ,,  ,  , ,,  , e",
+  "components": [
+    {
+      "name": "Apache Tomcat",
+      "version": "9.0.71",
+      "description": "Java Servlet container",
+      "supplier": "Apache Software Foundation",
+      "license": {
+        "id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "terms": "Permissive commercial license",
+        "restrictions": "Must include copyright notice"
+      },
+      "origin": "Open-Source",
+      "dependencies": [
+        "commons-logging:1.2"
+      ],
+      "hashes": {
+        "SHA-256": "a1b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890"
+      },
+      "purl": "pkg:maven/org.apache.tomcat/tomcat@9.0.71",
+      "type": "library",
+      "release_date": "2023-04-12",
+      "eol_date": "2026-12-31",
+      "criticality": "Critical",
+      "usage_restrictions": "No export outside India",
+      "comments": "Production web server",
+      "executable_property": "Yes",
+      "archive_property": "No",
+      "structured_property": "JAR file structure",
+      "unique_identifier": "pkg:maven/org.apache.tomcat/tomcat@9.0.71",
+      "timestamp": "2025-09-10T17:41:45.323665Z",
+      "patch_status": "Patch available"
+    },
+    {
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "description": "Logging library",
+      "supplier": "Apache Software Foundation",
+      "license": {
+        "id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "terms": "Permissive open source license",
+        "restrictions": "Must include original copyright"
+      },
+      "origin": "Open-Source",
+      "dependencies": [
+        "slf4j-api:1.7.32"
+      ],
+      "hashes": {
+        "SHA-256": "b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890a1"
+      },
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "type": "library",
+      "release_date": "2021-01-15",
+      "eol_date": "2024-01-01",
+      "criticality": "Critical",
+      "usage_restrictions": "None",
+      "comments": "Contains Log4Shell vulnerability",
+      "executable_property": "No",
+      "archive_property": "No",
+      "structured_property": "Library",
+      "unique_identifier": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "timestamp": "2025-09-10T17:41:45.323707Z",
+      "patch_status": "Patch available"
+    },
+    {
+      "name": "spring-core",
+      "version": "5.3.18",
+      "description": "",
+      "supplier": "VMware",
+      "license": {
+        "id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "terms": "Permissive license with patent grant",
+        "restrictions": "Spring-specific trademark restrictions apply"
+      },
+      "origin": "Open-Source",
+      "dependencies": [
+        "spring-beans:5.3.18"
+      ],
+      "hashes": {
+        "SHA-256": "c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890a1b2"
+      },
+      "purl": "pkg:maven/org.springframework/spring-core@5.3.18",
+      "type": "library",
+      "release_date": "2022-03-15",
+      "eol_date": "2025-03-15",
+      "criticality": "High",
+      "usage_restrictions": "None",
+      "comments": "Core framework component",
+      "executable_property": "No",
+      "archive_property": "No",
+      "structured_property": "Library",
+      "unique_identifier": "pkg:maven/org.springframework/spring-core@5.3.18",
+      "timestamp": "2025-09-10T17:41:45.323719Z",
+      "patch_status": "No known vulnerabilities"
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "cve_id": "GHSA-jfh8-c2jp-5v3q",
+      "severity": "Critical",
+      "description": "Remote code injection in Log4j",
+      "cvss_score": 10,
+      "fixed_versions": [
+        "2.15.0"
+      ],
+      "component_name": "log4j-core",
+      "component_version": "2.14.1",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    },
+    {
+      "cve_id": "GHSA-7rjr-3q55-vv33",
+      "severity": "Critical",
+      "description": "Incomplete fix for Apache Log4j vulnerability",
+      "cvss_score": 9,
+      "fixed_versions": [
+        "2.16.0"
+      ],
+      "component_name": "log4j-core",
+      "component_version": "2.14.1",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    },
+    {
+      "cve_id": "GHSA-p6xc-xr62-6r2g",
+      "severity": "High",
+      "description": "Apache Log4j2 vulnerable to Improper Input Validation and Uncontrolled Recursion",
+      "cvss_score": 8.6,
+      "fixed_versions": [
+        "2.17.0"
+      ],
+      "component_name": "log4j-core",
+      "component_version": "2.14.1",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    },
+    {
+      "cve_id": "GHSA-8489-44mv-ggj8",
+      "severity": "Medium",
+      "description": "Improper Input Validation and Injection in Apache Log4j2",
+      "cvss_score": 6.6,
+      "fixed_versions": [
+        "2.17.1"
+      ],
+      "component_name": "log4j-core",
+      "component_version": "2.14.1",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    },
+    {
+      "cve_id": "GHSA-q3mw-pvr8-9ggc",
+      "severity": "Medium",
+      "description": "Apache Tomcat Open Redirect vulnerability",
+      "cvss_score": 6.1,
+      "fixed_versions": [
+        "9.0.80"
+      ],
+      "component_name": "Apache Tomcat",
+      "component_version": "9.0.71",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    },
+    {
+      "cve_id": "GHSA-r6j3-px5g-cq3x",
+      "severity": "Medium",
+      "description": "Apache Tomcat Improper Input Validation vulnerability",
+      "cvss_score": 5.3,
+      "fixed_versions": [
+        "9.0.81"
+      ],
+      "component_name": "Apache Tomcat",
+      "component_version": "9.0.71",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    },
+    {
+      "cve_id": "GHSA-g8pj-r55q-5c2v",
+      "severity": "Medium",
+      "description": "Apache Tomcat Incomplete Cleanup vulnerability",
+      "cvss_score": 5.3,
+      "fixed_versions": [
+        "9.0.81"
+      ],
+      "component_name": "Apache Tomcat",
+      "component_version": "9.0.71",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    }
+  ],
+  "summary": {
+    "total_components": 3,
+    "total_vulnerabilities": 7,
+    "critical_vulnerabilities": 2,
+    "high_vulnerabilities": 1,
+    "medium_vulnerabilities": 4,
+    "low_vulnerabilities": 0,
+    "unknown_vulnerabilities": 0,
+    "severity_breakdown": {
+      "Critical": 2,
+      "High": 1,
+      "Medium": 4,
+      "Low": 0,
+      "Unknown": 0
+    }
+  },
+  "certin_compliance": {
+    "status": "PARTIALLY_COMPLIANT",
+    "coverage": "66.67%",
+    "compliant_components": 2,
+    "total_components": 3,
+    "missing_fields": {
+      "description": 1
+    },
+    "timestamp": "2025-09-10T17:41:45.360813Z"
+  },
+  "metadata": {
+    "timestamp": "2025-09-08T10:30:00Z",
+    "tools": [
+      "Basic SBOM Generator"
+    ]
+  }
+}

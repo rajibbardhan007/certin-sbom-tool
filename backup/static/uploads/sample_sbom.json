@@ -1,0 +1,62 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-09-10T11:10:48.978291Z",
+    "tools": [
+      {
+        "name": "CERT-In SBOM Tool",
+        "version": "1.0"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Apache Tomcat",
+      "version": "9.0.71",
+      "description": "Java Servlet container for web applications",
+      "purl": "pkg:maven/org.apache.tomcat/tomcat@9.0.71",
+      "type": "library",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "name": "Apache License 2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "certin:origin",
+          "value": "Open-Source"
+        },
+        {
+          "name": "certin:criticality",
+          "value": "Critical"
+        }
+      ]
+    },
+    {
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "description": "Apache Log4j Core logging library",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "type": "library",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "name": "Apache License 2.0"
+          }
+        }
+      ]
+    }
+  ]
+}

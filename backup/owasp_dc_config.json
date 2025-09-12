@@ -1,0 +1,23 @@
+{
+  "analyzer": {
+    "assembly": {
+      "enabled": false
+    },
+    "nuspec": {
+      "enabled": false
+    },
+    "composer": {
+      "enabled": false
+    },
+    "nodejs": {
+      "enabled": true
+    },
+    "python": {
+      "enabled": true
+    }
+  },
+  "advanced": {
+    "enableExperimental": true,
+    "failOnError": false
+  }
+}

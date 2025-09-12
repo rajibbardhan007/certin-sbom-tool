@@ -1,0 +1,222 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>CERT-In SBOM Compliance Report</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 40px; }
+                .header { background: #f5f5f5; padding: 20px; border-radius: 5px; }
+                .component { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+                .vulnerability { padding: 10px; margin: 5px 0; border-radius: 3px; }
+                .critical { background: #f8d7da; border-left: 4px solid #dc3545; }
+                .high { background: #fff3cd; border-left: 4px solid #ffc107; }
+                .medium { background: #d1ecf1; border-left: 4px solid #17a2b8; }
+                .low { background: #d4edda; border-left: 4px solid #28a745; }
+                .unknown { background: #e2e3e5; border-left: 4px solid #6c757d; }
+                .summary-card { background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0; }
+                .certin-field { background: #e9ecef; padding: 5px; border-radius: 3px; margin: 2px 0; }
+                .license-details { background: #f8f9fa; padding: 10px; border-radius: 3px; margin: 5px 0; }
+                .compliance-badge { background: #28a745; color: white; padding: 5px 10px; border-radius: 3px; }
+                .dependency-list { margin-left: 20px; }
+                .hash-value { font-family: monospace; font-size: 12px; }
+                .scanner-info { background: #e9ecef; padding: 10px; border-radius: 5px; margin: 10px 0; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>📋 CERT-In SBOM Compliance Report</h1>
+                <p><strong>Generated:</strong> 2025-09-11T23:03:06.264676</p>
+                <p><strong>Analysis ID:</strong> 7e8f0e36-ed70-4729-9ff9-98b24f2d14ed</p>
+                <p><strong>Format:</strong> CycloneDX</p>
+                <p><strong>Scanners Used:</strong> grype</p>
+                <p><strong>Compliance Status:</strong> <span class="compliance-badge">✅ FULLY_COMPLIANT</span></p>
+            </div>
+            
+            <div class="scanner-info">
+                <h3>🔧 Scanner Information</h3>
+                <p><strong>Primary Scanner:</strong> grype</p>
+                <p><strong>All Scanners:</strong> grype</p>
+                <p><strong>Scan Date:</strong> 2025-09-11T23:03:06.264676</p>
+            </div>
+            
+            <h2>📊 Summary</h2>
+            <div class="summary-card">
+                <p><strong>Total Components:</strong> 2</p>
+                <p><strong>Total Vulnerabilities:</strong> 4</p>
+                <p><strong>Critical:</strong> 2</p>
+                <p><strong>High:</strong> 1</p>
+                <p><strong>Medium:</strong> 1</p>
+                <p><strong>Low:</strong> 0</p>
+                <p><strong>Unknown:</strong> 0</p>
+            </div>
+            
+            <h2>🧩 Components Analysis</h2>
+            
+            <div class="component">
+                <h3>📦 log4j-core @ 2.14.1</h3>
+                
+                <div class="certin-field"><strong>Description:</strong> Apache Log4j Core</div>
+                <div class="certin-field"><strong>Supplier:</strong> Apache Software Foundation</div>
+                <div class="certin-field"><strong>Unique Identifier:</strong> <code>pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1</code></div>
+                
+                <!-- Enhanced License Information for 100% Compliance -->
+                <div class="license-details">
+                    <h4>📄 License Information</h4>
+                    <div class="certin-field"><strong>License:</strong> Apache License 2.0</div>
+                    <div class="certin-field"><strong>License ID:</strong> Apache-2.0</div>
+                    
+                    <div class="certin-field"><strong>License Terms:</strong> Permissive open source license</div>
+                    
+                    
+                    <div class="certin-field"><strong>License Restrictions:</strong> Must include original copyright</div>
+                    
+                    
+                    <div class="certin-field"><strong>License URL:</strong> <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">https://www.apache.org/licenses/LICENSE-2.0</a></div>
+                    
+                </div>
+                
+                <div class="certin-field"><strong>Origin:</strong> Open-Source</div>
+                <div class="certin-field"><strong>Criticality:</strong> Critical</div>
+                <div class="certin-field"><strong>Release Date:</strong> 2021-01-15</div>
+                <div class="certin-field"><strong>EOL Date:</strong> 2024-01-01</div>
+                <div class="certin-field"><strong>Usage Restrictions:</strong> None</div>
+                <div class="certin-field"><strong>Comments:</strong> Contains Log4Shell vulnerability</div>
+                <div class="certin-field"><strong>Executable:</strong> No</div>
+                <div class="certin-field"><strong>Archive:</strong> No</div>
+                <div class="certin-field"><strong>Structured:</strong> Library</div>
+                <div class="certin-field"><strong>Patch Status:</strong> Patch available</div>
+                <div class="certin-field"><strong>Timestamp:</strong> 2025-09-11T17:32:55.041555Z</div>
+                
+                <!-- Dependencies -->
+                
+                <div class="certin-field">
+                    <strong>Dependencies:</strong>
+                    <ul class="dependency-list">
+                        
+                        <li>slf4j-api:1.7.32</li>
+                        
+                    </ul>
+                </div>
+                
+                
+                
+                <div class="certin-field">
+                    <strong>Hashes:</strong>
+                    
+                    <div class="hash-value">SHA-256: a1e4e5c71c693394a419844a6e5e5f0f3b4f5e6d7c8a9b0c1d2e3f4a5b6c7d8e9</div>
+                    
+                </div>
+                
+                
+                
+                <p>✅ No known vulnerabilities</p>
+                
+            </div>
+            
+            <div class="component">
+                <h3>📦 spring-core @ 5.3.18</h3>
+                
+                <div class="certin-field"><strong>Description:</strong> Spring Framework Core</div>
+                <div class="certin-field"><strong>Supplier:</strong> VMware</div>
+                <div class="certin-field"><strong>Unique Identifier:</strong> <code>pkg:maven/org.springframework/spring-core@5.3.18</code></div>
+                
+                <!-- Enhanced License Information for 100% Compliance -->
+                <div class="license-details">
+                    <h4>📄 License Information</h4>
+                    <div class="certin-field"><strong>License:</strong> Apache License 2.0</div>
+                    <div class="certin-field"><strong>License ID:</strong> Apache-2.0</div>
+                    
+                    <div class="certin-field"><strong>License Terms:</strong> Permissive license with patent grant</div>
+                    
+                    
+                    <div class="certin-field"><strong>License Restrictions:</strong> Spring-specific trademark restrictions apply</div>
+                    
+                    
+                    <div class="certin-field"><strong>License URL:</strong> <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">https://www.apache.org/licenses/LICENSE-2.0</a></div>
+                    
+                </div>
+                
+                <div class="certin-field"><strong>Origin:</strong> Open-Source</div>
+                <div class="certin-field"><strong>Criticality:</strong> High</div>
+                <div class="certin-field"><strong>Release Date:</strong> 2022-03-15</div>
+                <div class="certin-field"><strong>EOL Date:</strong> 2025-03-15</div>
+                <div class="certin-field"><strong>Usage Restrictions:</strong> None</div>
+                <div class="certin-field"><strong>Comments:</strong> Core framework component</div>
+                <div class="certin-field"><strong>Executable:</strong> No</div>
+                <div class="certin-field"><strong>Archive:</strong> No</div>
+                <div class="certin-field"><strong>Structured:</strong> Library</div>
+                <div class="certin-field"><strong>Patch Status:</strong> No known vulnerabilities</div>
+                <div class="certin-field"><strong>Timestamp:</strong> 2025-09-11T17:32:56.152019Z</div>
+                
+                <!-- Dependencies -->
+                
+                <div class="certin-field">
+                    <strong>Dependencies:</strong>
+                    <ul class="dependency-list">
+                        
+                        <li>spring-beans:5.3.18</li>
+                        
+                    </ul>
+                </div>
+                
+                
+                
+                <div class="certin-field">
+                    <strong>Hashes:</strong>
+                    
+                    <div class="hash-value">SHA-256: b2e4e5c71c693394a419844a6e5e5f0f3b4f5e6d7c8a9b0c1d2e3f4a5b6c7d8e9</div>
+                    
+                </div>
+                
+                
+                
+                <p>✅ No known vulnerabilities</p>
+                
+            </div>
+            
+            
+            <h2>📋 Vulnerability Summary</h2>
+            
+            <div class="vulnerability critical">
+                <strong>CVE-2023-38545 (Critical)</strong><br>
+                <strong>Component:</strong> log4j-core 2.14.1<br>
+                <strong>CVSS Score:</strong> 10<br>
+                <strong>Description:</strong> Remote code injection in Log4j<br>
+                <strong>Fixed Versions:</strong> 2.15.0<br>
+                <strong>VEX Status:</strong> Under Investigation<br>
+                <strong>Scanner:</strong> Grype
+            </div>
+            
+            <div class="vulnerability critical">
+                <strong>CVE-2021-45046 (Critical)</strong><br>
+                <strong>Component:</strong> log4j-core 2.14.1<br>
+                <strong>CVSS Score:</strong> 9<br>
+                <strong>Description:</strong> Incomplete fix for Apache Log4j vulnerability<br>
+                <strong>Fixed Versions:</strong> 2.16.0<br>
+                <strong>VEX Status:</strong> Under Investigation<br>
+                <strong>Scanner:</strong> Grype
+            </div>
+            
+            <div class="vulnerability high">
+                <strong>CVE-2021-45105 (High)</strong><br>
+                <strong>Component:</strong> log4j-core 2.14.1<br>
+                <strong>CVSS Score:</strong> 8.6<br>
+                <strong>Description:</strong> Apache Log4j2 vulnerable to Improper Input Validation and Uncontrolled Recursion<br>
+                <strong>Fixed Versions:</strong> 2.17.0<br>
+                <strong>VEX Status:</strong> Under Investigation<br>
+                <strong>Scanner:</strong> Grype
+            </div>
+            
+            <div class="vulnerability medium">
+                <strong>CVE-2021-44832 (Medium)</strong><br>
+                <strong>Component:</strong> log4j-core 2.14.1<br>
+                <strong>CVSS Score:</strong> 6.6<br>
+                <strong>Description:</strong> Improper Input Validation and Injection in Apache Log4j2<br>
+                <strong>Fixed Versions:</strong> 2.17.1<br>
+                <strong>VEX Status:</strong> Under Investigation<br>
+                <strong>Scanner:</strong> Grype
+            </div>
+            
+        </body>
+        </html>
+        

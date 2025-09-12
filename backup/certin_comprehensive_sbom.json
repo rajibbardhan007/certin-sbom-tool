@@ -1,0 +1,366 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "version": 1,
+  "serialNumber": "urn:uuid:3e671687-395b-41c5-9c0a-5e2c2b5c5c5c",
+  "metadata": {
+    "timestamp": "2025-09-08T10:30:00Z",
+    "tools": [
+      {
+        "name": "CERT-In SBOM Generator",
+        "version": "1.0"
+      }
+    ],
+    "authors": [
+      {
+        "name": "Security Team",
+        "email": "security@example.com"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "Apache Tomcat",
+      "version": "9.0.71",
+      "description": "An open-source Java Servlet container for web applications",
+      "purl": "pkg:supplier/ApacheSoftwareFoundation/ApacheTomcat@9.0.71?arch=x86_64&os=linux#server/webapps",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a1b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "name": "Apache License 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "supplier": {
+        "name": "Apache Software Foundation",
+        "url": "https://www.apache.org/"
+      },
+      "properties": [
+        {
+          "name": "certin:origin",
+          "value": "Open-Source"
+        },
+        {
+          "name": "certin:release_date",
+          "value": "2023-04-12"
+        },
+        {
+          "name": "certin:eol_date", 
+          "value": "2026-12-31"
+        },
+        {
+          "name": "certin:criticality",
+          "value": "Critical"
+        },
+        {
+          "name": "certin:usage_restrictions",
+          "value": "No export outside India"
+        },
+        {
+          "name": "certin:comments",
+          "value": "Primary web server for production environment"
+        },
+        {
+          "name": "certin:executable_property",
+          "value": "Yes"
+        },
+        {
+          "name": "certin:archive_property", 
+          "value": "No"
+        },
+        {
+          "name": "certin:structured_property",
+          "value": "JAR file structure"
+        },
+        {
+          "name": "certin:patch_status",
+          "value": "Patched in 9.0.72"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "description": "Apache Log4j Core logging library",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890a1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "name": "Apache License 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "supplier": {
+        "name": "Apache Software Foundation",
+        "url": "https://www.apache.org/"
+      },
+      "properties": [
+        {
+          "name": "certin:origin",
+          "value": "Open-Source"
+        },
+        {
+          "name": "certin:release_date",
+          "value": "2021-01-15"
+        },
+        {
+          "name": "certin:eol_date",
+          "value": "2024-01-01"
+        },
+        {
+          "name": "certin:criticality",
+          "value": "Critical"
+        },
+        {
+          "name": "certin:usage_restrictions",
+          "value": "No restrictions"
+        },
+        {
+          "name": "certin:comments",
+          "value": "Contains known critical vulnerabilities"
+        },
+        {
+          "name": "certin:executable_property",
+          "value": "No"
+        },
+        {
+          "name": "certin:archive_property",
+          "value": "No"
+        },
+        {
+          "name": "certin:structured_property",
+          "value": "Library"
+        },
+        {
+          "name": "certin:patch_status",
+          "value": "Requires upgrade to 2.17.0"
+        }
+      ]
+    },
+    {
+      "type": "library", 
+      "name": "spring-core",
+      "version": "5.3.18",
+      "description": "Spring Framework Core functionality",
+      "purl": "pkg:maven/org.springframework/spring-core@5.3.18",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890a1b2"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "name": "Apache License 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "supplier": {
+        "name": "VMware",
+        "url": "https://spring.io/"
+      },
+      "properties": [
+        {
+          "name": "certin:origin",
+          "value": "Open-Source"
+        },
+        {
+          "name": "certin:release_date",
+          "value": "2022-03-15"
+        },
+        {
+          "name": "certin:eol_date",
+          "value": "2025-03-15"
+        },
+        {
+          "name": "certin:criticality",
+          "value": "High"
+        },
+        {
+          "name": "certin:usage_restrictions",
+          "value": "None"
+        },
+        {
+          "name": "certin:comments",
+          "value": "Core framework component"
+        },
+        {
+          "name": "certin:executable_property",
+          "value": "No"
+        },
+        {
+          "name": "certin:archive_property",
+          "value": "No"
+        },
+        {
+          "name": "certin:structured_property",
+          "value": "Library"
+        },
+        {
+          "name": "certin:patch_status",
+          "value": "Current version"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "name": "Custom Payment Processor",
+      "version": "1.2.3",
+      "description": "Proprietary payment processing module",
+      "purl": "pkg:supplier/MyCompany/CustomPaymentProcessor@1.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890a1b2c3"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Proprietary",
+            "name": "Proprietary License",
+            "url": "https://mycompany.com/license"
+          }
+        }
+      ],
+      "supplier": {
+        "name": "MyCompany Inc.",
+        "url": "https://mycompany.com/"
+      },
+      "properties": [
+        {
+          "name": "certin:origin",
+          "value": "Proprietary"
+        },
+        {
+          "name": "certin:release_date",
+          "value": "2024-01-20"
+        },
+        {
+          "name": "certin:eol_date",
+          "value": "2027-01-20"
+        },
+        {
+          "name": "certin:criticality",
+          "value": "High"
+        },
+        {
+          "name": "certin:usage_restrictions",
+          "value": "No external distribution allowed"
+        },
+        {
+          "name": "certin:comments",
+          "value": "Contains sensitive financial logic"
+        },
+        {
+          "name": "certin:executable_property",
+          "value": "Yes"
+        },
+        {
+          "name": "certin:archive_property",
+          "value": "No"
+        },
+        {
+          "name": "certin:structured_property",
+          "value": "Proprietary binary format"
+        },
+        {
+          "name": "certin:patch_status",
+          "value": "Up-to-date"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:supplier/ApacheSoftwareFoundation/ApacheTomcat@9.0.71?arch=x86_64&os=linux#server/webapps",
+      "dependsOn": [
+        "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+        "pkg:maven/org.springframework/spring-core@5.3.18"
+      ]
+    },
+    {
+      "ref": "pkg:supplier/MyCompany/CustomPaymentProcessor@1.2.3",
+      "dependsOn": [
+        "pkg:maven/org.springframework/spring-core@5.3.18"
+      ]
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "id": "CVE-2021-44228",
+      "source": {
+        "name": "NVD",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"
+      },
+      "ratings": [
+        {
+          "source": {
+            "name": "NVD",
+            "url": "https://nvd.nist.gov"
+          },
+          "score": 10.0,
+          "severity": "critical",
+          "method": "CVSSv3.1",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H"
+        }
+      ],
+      "cwes": [1334],
+      "description": "Apache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints.",
+      "recommendation": "Upgrade to Log4j 2.17.1, 2.12.4, or 2.3.2",
+      "affects": [
+        {
+          "ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2022-22965",
+      "source": {
+        "name": "NVD",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-22965"
+      },
+      "ratings": [
+        {
+          "source": {
+            "name": "NVD",
+            "url": "https://nvd.nist.gov"
+          },
+          "score": 8.1,
+          "severity": "high",
+          "method": "CVSSv3.1",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H"
+        }
+      ],
+      "cwes": [94],
+      "description": "Spring Framework RCE via Data Binding on JDK 9+",
+      "recommendation": "Upgrade to Spring Framework 5.3.18 or 5.2.20",
+      "affects": [
+        {
+          "ref": "pkg:maven/org.springframework/spring-core@5.3.18"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "analysis_id": "6d23d851-fa2d-48ad-947f-929811956cfd",
+  "date": "2025-09-10T19:04:41.710989",
+  "format": "CycloneDX",
+  "scanner_used": "mock",
+  "components": [
+    {
+      "name": "Apache Tomcat",
+      "version": "9.0.71",
+      "description": "An open-source Java Servlet container for web applications",
+      "supplier": "Apache Software Foundation",
+      "license": {
+        "id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "terms": "Permissive commercial license",
+        "restrictions": "Must include copyright notice"
+      },
+      "origin": "Open-Source",
+      "dependencies": [
+        "commons-logging:1.2"
+      ],
+      "hashes": {
+        "SHA-256": "a1b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890"
+      },
+      "purl": "pkg:supplier/ApacheSoftwareFoundation/ApacheTomcat@9.0.71?arch=x86_64&os=linux#server/webapps",
+      "type": "library",
+      "release_date": "2023-04-12",
+      "eol_date": "2026-12-31",
+      "criticality": "Critical",
+      "usage_restrictions": "No export outside India",
+      "comments": "Production web server",
+      "executable_property": "Yes",
+      "archive_property": "No",
+      "structured_property": "JAR file structure",
+      "unique_identifier": "pkg:supplier/ApacheSoftwareFoundation/ApacheTomcat@9.0.71?arch=x86_64&os=linux#server/webapps",
+      "timestamp": "2025-09-10T19:04:41.117907Z",
+      "patch_status": "Patch available"
+    },
+    {
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "description": "Apache Log4j Core logging library",
+      "supplier": "Apache Software Foundation",
+      "license": {
+        "id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "terms": "Permissive open source license",
+        "restrictions": "Must include original copyright"
+      },
+      "origin": "Open-Source",
+      "dependencies": [
+        "slf4j-api:1.7.32"
+      ],
+      "hashes": {
+        "SHA-256": "b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890a1"
+      },
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "type": "library",
+      "release_date": "2021-01-15",
+      "eol_date": "2024-01-01",
+      "criticality": "Critical",
+      "usage_restrictions": "None",
+      "comments": "Contains Log4Shell vulnerability",
+      "executable_property": "No",
+      "archive_property": "No",
+      "structured_property": "Library",
+      "unique_identifier": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "timestamp": "2025-09-10T19:04:41.119131Z",
+      "patch_status": "Patch available"
+    },
+    {
+      "name": "spring-core",
+      "version": "5.3.18",
+      "description": "Spring Framework Core functionality",
+      "supplier": "VMware",
+      "license": {
+        "id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "terms": "Permissive license with patent grant",
+        "restrictions": "Spring-specific trademark restrictions apply"
+      },
+      "origin": "Open-Source",
+      "dependencies": [
+        "spring-beans:5.3.18"
+      ],
+      "hashes": {
+        "SHA-256": "c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890a1b2"
+      },
+      "purl": "pkg:maven/org.springframework/spring-core@5.3.18",
+      "type": "library",
+      "release_date": "2022-03-15",
+      "eol_date": "2025-03-15",
+      "criticality": "High",
+      "usage_restrictions": "None",
+      "comments": "Core framework component",
+      "executable_property": "No",
+      "archive_property": "No",
+      "structured_property": "Library",
+      "unique_identifier": "pkg:maven/org.springframework/spring-core@5.3.18",
+      "timestamp": "2025-09-10T19:04:41.119342Z",
+      "patch_status": "Patch available"
+    },
+    {
+      "name": "Custom Payment Processor",
+      "version": "1.2.3",
+      "description": "Proprietary payment processing module",
+      "supplier": "MyCompany Inc.",
+      "license": {
+        "id": "Proprietary",
+        "name": "Proprietary License",
+        "url": "https://mycompany.com/license",
+        "terms": "License terms not specified",
+        "restrictions": "No specific restrictions identified"
+      },
+      "origin": "Unknown",
+      "dependencies": [],
+      "hashes": {
+        "SHA-256": "d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890a1b2c3"
+      },
+      "purl": "pkg:supplier/MyCompany/CustomPaymentProcessor@1.2.3",
+      "type": "application",
+      "release_date": "",
+      "eol_date": "",
+      "criticality": "Medium",
+      "usage_restrictions": "",
+      "comments": "",
+      "executable_property": "No",
+      "archive_property": "No",
+      "structured_property": "",
+      "unique_identifier": "pkg:supplier/MyCompany/CustomPaymentProcessor@1.2.3",
+      "timestamp": "2025-09-10T19:04:41.119441Z",
+      "patch_status": "No known vulnerabilities"
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "cve_id": "CVE-2020-1938",
+      "severity": "High",
+      "description": "Apache Tomcat AJP File Read/Inclusion Vulnerability",
+      "cvss_score": 7.5,
+      "fixed_versions": [
+        "9.0.31",
+        "8.5.51",
+        "7.0.100"
+      ],
+      "component_name": "Apache Tomcat",
+      "component_version": "9.0.71",
+      "vex_status": "Under Investigation",
+      "scanner": "Mock"
+    },
+    {
+      "cve_id": "CVE-2021-44228",
+      "severity": "Critical",
+      "description": "Apache Log4j2 JNDI features vulnerability",
+      "cvss_score": 10.0,
+      "fixed_versions": [
+        "2.15.0",
+        "2.16.0"
+      ],
+      "component_name": "log4j-core",
+      "component_version": "2.14.1",
+      "vex_status": "Under Investigation",
+      "scanner": "Mock"
+    },
+    {
+      "cve_id": "CVE-2022-22965",
+      "severity": "High",
+      "description": "Spring Framework RCE via Data Binding",
+      "cvss_score": 8.1,
+      "fixed_versions": [
+        "5.3.18",
+        "5.2.20"
+      ],
+      "component_name": "spring-core",
+      "component_version": "5.3.18",
+      "vex_status": "Under Investigation",
+      "scanner": "Mock"
+    }
+  ],
+  "summary": {
+    "total_components": 4,
+    "total_vulnerabilities": 3,
+    "critical_vulnerabilities": 1,
+    "high_vulnerabilities": 2,
+    "medium_vulnerabilities": 0,
+    "low_vulnerabilities": 0,
+    "unknown_vulnerabilities": 0,
+    "severity_breakdown": {
+      "Critical": 1,
+      "High": 2,
+      "Medium": 0,
+      "Low": 0,
+      "Unknown": 0
+    }
+  },
+  "certin_compliance": {
+    "status": "PARTIALLY_COMPLIANT",
+    "coverage": "75.0%",
+    "compliant_components": 3,
+    "total_components": 4,
+    "missing_fields": {
+      "dependencies": 1,
+      "release_date": 1,
+      "eol_date": 1,
+      "usage_restrictions": 1,
+      "comments": 1,
+      "structured_property": 1
+    },
+    "timestamp": "2025-09-10T19:04:41.742332Z"
+  },
+  "metadata": {
+    "timestamp": "2025-09-08T10:30:00Z",
+    "tools": [
+      "CERT-In SBOM Generator"
+    ]
+  }
+}

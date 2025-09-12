@@ -1,0 +1,238 @@
+{
+  "document": {
+    "title": "CERT-In SBOM Vulnerability Report",
+    "tracking": {
+      "id": "932d34b6-f397-498b-a805-b50c50b6f2a0",
+      "version": "1.0",
+      "current_release_date": "2025-09-10T18:52:14.309159Z",
+      "generator": {
+        "engine": {
+          "name": "CERT-In SBOM Tool",
+          "version": "1.0"
+        }
+      }
+    },
+    "publisher": {
+      "name": "CERT-In SBOM Compliance Tool",
+      "category": "coordinator"
+    }
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "name": "SBOM Components",
+        "category": "product_name",
+        "branches": [
+          {
+            "name": "ShiftLeftSecurity/scan-action master",
+            "category": "product_version",
+            "product": {
+              "name": "ShiftLeftSecurity/scan-action",
+              "version": "master",
+              "purl": "pkg:github/ShiftLeftSecurity/scan-action@master"
+            }
+          },
+          {
+            "name": "actions/checkout v3",
+            "category": "product_version",
+            "product": {
+              "name": "actions/checkout",
+              "version": "v3",
+              "purl": "pkg:github/actions/checkout@v3"
+            }
+          },
+          {
+            "name": "actions/checkout v3",
+            "category": "product_version",
+            "product": {
+              "name": "actions/checkout",
+              "version": "v3",
+              "purl": "pkg:github/actions/checkout@v3"
+            }
+          },
+          {
+            "name": "actions/checkout v3",
+            "category": "product_version",
+            "product": {
+              "name": "actions/checkout",
+              "version": "v3",
+              "purl": "pkg:github/actions/checkout@v3"
+            }
+          },
+          {
+            "name": "actions/checkout v3",
+            "category": "product_version",
+            "product": {
+              "name": "actions/checkout",
+              "version": "v3",
+              "purl": "pkg:github/actions/checkout@v3"
+            }
+          },
+          {
+            "name": "actions/checkout v4",
+            "category": "product_version",
+            "product": {
+              "name": "actions/checkout",
+              "version": "v4",
+              "purl": "pkg:github/actions/checkout@v4"
+            }
+          },
+          {
+            "name": "docker/login-action v1",
+            "category": "product_version",
+            "product": {
+              "name": "docker/login-action",
+              "version": "v1",
+              "purl": "pkg:github/docker/login-action@v1"
+            }
+          },
+          {
+            "name": "github/codeql-action/analyze v2",
+            "category": "product_version",
+            "product": {
+              "name": "github/codeql-action/analyze",
+              "version": "v2",
+              "purl": "pkg:github/github/codeql-action@v2#analyze"
+            }
+          },
+          {
+            "name": "github/codeql-action/autobuild v2",
+            "category": "product_version",
+            "product": {
+              "name": "github/codeql-action/autobuild",
+              "version": "v2",
+              "purl": "pkg:github/github/codeql-action@v2#autobuild"
+            }
+          },
+          {
+            "name": "github/codeql-action/init v2",
+            "category": "product_version",
+            "product": {
+              "name": "github/codeql-action/init",
+              "version": "v2",
+              "purl": "pkg:github/github/codeql-action@v2#init"
+            }
+          },
+          {
+            "name": "github/codeql-action/upload-sarif v2",
+            "category": "product_version",
+            "product": {
+              "name": "github/codeql-action/upload-sarif",
+              "version": "v2",
+              "purl": "pkg:github/github/codeql-action@v2#upload-sarif"
+            }
+          },
+          {
+            "name": "psr/log 3.0.2",
+            "category": "product_version",
+            "product": {
+              "name": "psr/log",
+              "version": "3.0.2",
+              "purl": "pkg:composer/psr/log@3.0.2"
+            }
+          },
+          {
+            "name": "symfony/deprecation-contracts v3.5.1",
+            "category": "product_version",
+            "product": {
+              "name": "symfony/deprecation-contracts",
+              "version": "v3.5.1",
+              "purl": "pkg:composer/symfony/deprecation-contracts@v3.5.1"
+            }
+          },
+          {
+            "name": "symfony/finder v7.2.2",
+            "category": "product_version",
+            "product": {
+              "name": "symfony/finder",
+              "version": "v7.2.2",
+              "purl": "pkg:composer/symfony/finder@v7.2.2"
+            }
+          },
+          {
+            "name": "symfony/polyfill-ctype v1.31.0",
+            "category": "product_version",
+            "product": {
+              "name": "symfony/polyfill-ctype",
+              "version": "v1.31.0",
+              "purl": "pkg:composer/symfony/polyfill-ctype@v1.31.0"
+            }
+          },
+          {
+            "name": "symfony/yaml v7.2.3",
+            "category": "product_version",
+            "product": {
+              "name": "symfony/yaml",
+              "version": "v7.2.3",
+              "purl": "pkg:composer/symfony/yaml@v7.2.3"
+            }
+          },
+          {
+            "name": "zircote/swagger-php 4.11.1",
+            "category": "product_version",
+            "product": {
+              "name": "zircote/swagger-php",
+              "version": "4.11.1",
+              "purl": "pkg:composer/zircote/swagger-php@4.11.1"
+            }
+          },
+          {
+            "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/codeql-analysis.yml ",
+            "category": "product_version",
+            "product": {
+              "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/codeql-analysis.yml",
+              "version": "",
+              "purl": "pkg:supplier/unknown//home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/codeql-analysis.yml@unknown"
+            }
+          },
+          {
+            "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/docker-image.yml ",
+            "category": "product_version",
+            "product": {
+              "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/docker-image.yml",
+              "version": "",
+              "purl": "pkg:supplier/unknown//home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/docker-image.yml@unknown"
+            }
+          },
+          {
+            "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/pytest.yml ",
+            "category": "product_version",
+            "product": {
+              "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/pytest.yml",
+              "version": "",
+              "purl": "pkg:supplier/unknown//home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/pytest.yml@unknown"
+            }
+          },
+          {
+            "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/shiftleft-analysis.yml ",
+            "category": "product_version",
+            "product": {
+              "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/shiftleft-analysis.yml",
+              "version": "",
+              "purl": "pkg:supplier/unknown//home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/shiftleft-analysis.yml@unknown"
+            }
+          },
+          {
+            "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/vulnerable.yml ",
+            "category": "product_version",
+            "product": {
+              "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/vulnerable.yml",
+              "version": "",
+              "purl": "pkg:supplier/unknown//home/bandit/Desktop/tools/certin-sbom-tool/DVWA/.github/workflows/vulnerable.yml@unknown"
+            }
+          },
+          {
+            "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/vulnerabilities/api/composer.lock ",
+            "category": "product_version",
+            "product": {
+              "name": "/home/bandit/Desktop/tools/certin-sbom-tool/DVWA/vulnerabilities/api/composer.lock",
+              "version": "",
+              "purl": "pkg:supplier/unknown//home/bandit/Desktop/tools/certin-sbom-tool/DVWA/vulnerabilities/api/composer.lock@unknown"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "vulnerabilities": []
+}

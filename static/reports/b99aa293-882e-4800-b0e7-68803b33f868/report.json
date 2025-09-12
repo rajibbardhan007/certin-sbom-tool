@@ -1,0 +1,156 @@
+{
+  "analysis_id": "b99aa293-882e-4800-b0e7-68803b33f868",
+  "date": "2025-09-10T17:40:51.334061",
+  "format": "CycloneDX",
+  "scanner_used": "g, ,,  , r, ,,  , y, ,,  , p, ,,  , e",
+  "components": [
+    {
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "description": "Apache Log4j Core",
+      "supplier": "Apache Software Foundation",
+      "license": {
+        "id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "terms": "Permissive open source license",
+        "restrictions": "Must include original copyright"
+      },
+      "origin": "Open-Source",
+      "dependencies": [
+        "slf4j-api:1.7.32"
+      ],
+      "hashes": {
+        "SHA-256": "a1e4e5c71c693394a419844a6e5e5f0f3b4f5e6d7c8a9b0c1d2e3f4a5b6c7d8e9"
+      },
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "type": "library",
+      "release_date": "2021-01-15",
+      "eol_date": "2024-01-01",
+      "criticality": "Critical",
+      "usage_restrictions": "None",
+      "comments": "Contains Log4Shell vulnerability",
+      "executable_property": "No",
+      "archive_property": "No",
+      "structured_property": "Library",
+      "unique_identifier": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "timestamp": "2025-09-10T17:40:51.333653Z",
+      "patch_status": "Patch available"
+    },
+    {
+      "name": "spring-core",
+      "version": "5.3.18",
+      "description": "Spring Framework Core",
+      "supplier": "VMware",
+      "license": {
+        "id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "terms": "Permissive license with patent grant",
+        "restrictions": "Spring-specific trademark restrictions apply"
+      },
+      "origin": "Open-Source",
+      "dependencies": [
+        "spring-beans:5.3.18"
+      ],
+      "hashes": {
+        "SHA-256": "b2e4e5c71c693394a419844a6e5e5f0f3b4f5e6d7c8a9b0c1d2e3f4a5b6c7d8e9"
+      },
+      "purl": "pkg:maven/org.springframework/spring-core@5.3.18",
+      "type": "library",
+      "release_date": "2022-03-15",
+      "eol_date": "2025-03-15",
+      "criticality": "High",
+      "usage_restrictions": "None",
+      "comments": "Core framework component",
+      "executable_property": "No",
+      "archive_property": "No",
+      "structured_property": "Library",
+      "unique_identifier": "pkg:maven/org.springframework/spring-core@5.3.18",
+      "timestamp": "2025-09-10T17:40:51.333741Z",
+      "patch_status": "No known vulnerabilities"
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "cve_id": "GHSA-jfh8-c2jp-5v3q",
+      "severity": "Critical",
+      "description": "Remote code injection in Log4j",
+      "cvss_score": 10,
+      "fixed_versions": [
+        "2.15.0"
+      ],
+      "component_name": "log4j-core",
+      "component_version": "2.14.1",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    },
+    {
+      "cve_id": "GHSA-7rjr-3q55-vv33",
+      "severity": "Critical",
+      "description": "Incomplete fix for Apache Log4j vulnerability",
+      "cvss_score": 9,
+      "fixed_versions": [
+        "2.16.0"
+      ],
+      "component_name": "log4j-core",
+      "component_version": "2.14.1",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    },
+    {
+      "cve_id": "GHSA-p6xc-xr62-6r2g",
+      "severity": "High",
+      "description": "Apache Log4j2 vulnerable to Improper Input Validation and Uncontrolled Recursion",
+      "cvss_score": 8.6,
+      "fixed_versions": [
+        "2.17.0"
+      ],
+      "component_name": "log4j-core",
+      "component_version": "2.14.1",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    },
+    {
+      "cve_id": "GHSA-8489-44mv-ggj8",
+      "severity": "Medium",
+      "description": "Improper Input Validation and Injection in Apache Log4j2",
+      "cvss_score": 6.6,
+      "fixed_versions": [
+        "2.17.1"
+      ],
+      "component_name": "log4j-core",
+      "component_version": "2.14.1",
+      "vex_status": "Under Investigation",
+      "scanner": "Grype"
+    }
+  ],
+  "summary": {
+    "total_components": 2,
+    "total_vulnerabilities": 4,
+    "critical_vulnerabilities": 2,
+    "high_vulnerabilities": 1,
+    "medium_vulnerabilities": 1,
+    "low_vulnerabilities": 0,
+    "unknown_vulnerabilities": 0,
+    "severity_breakdown": {
+      "Critical": 2,
+      "High": 1,
+      "Medium": 1,
+      "Low": 0,
+      "Unknown": 0
+    }
+  },
+  "certin_compliance": {
+    "status": "FULLY_COMPLIANT",
+    "coverage": "100.0%",
+    "compliant_components": 2,
+    "total_components": 2,
+    "missing_fields": {},
+    "timestamp": "2025-09-10T17:40:51.354065Z"
+  },
+  "metadata": {
+    "timestamp": "",
+    "tools": []
+  }
+}

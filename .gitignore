@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+.venv/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# OS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# logs and db
+*.log
+*.sqlite3
+*.db
+
+# secret files
+.env
+secrets.json
+
+# others
+node_modules/
+dist/
+build/
