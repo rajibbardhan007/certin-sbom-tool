@@ -1,18 +1,18 @@
-# Use Python slim image
-FROM python:3.11-slim
+# Use official Python 3.13 slim image as base
+FROM python:3.13-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Set working directory
 WORKDIR /app
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV PATH="/app/.venv/bin:$PATH"
+# Copy requirements file first to leverage Docker caching
+COPY requirements.txt .
 
-# Copy project files
-COPY . .
-
-# Install system dependencies for WeasyPrint, Grype, Dependency-Check
+# Install system dependencies (for WeasyPrint, curl, unzip, Java for Dependency-Check)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev \
@@ -28,39 +28,37 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     shared-mime-info \
     curl \
     unzip \
+    openjdk-11-jre-headless \
     wget \
     git \
- && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Create virtual environment
-RUN python3 -m venv .venv
+RUN python3 -m venv $VIRTUAL_ENV
 
-# Activate venv and install Python dependencies
-RUN . .venv/bin/activate && pip install --upgrade pip \
-    && pip install flask==2.3.3 requests==2.31.0 jinja2==3.1.2 python-magic==0.4.27 fpdf==1.7.2 weasyprint==58.0
+# Upgrade pip and install Python dependencies
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Grype (official script)
+# Install Grype (for SBOM vulnerability scanning)
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
 # Install OWASP Dependency-Check
 RUN LATEST_VERSION=$(curl -s https://api.github.com/repos/jeremylong/DependencyCheck/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
- && TEMP_DIR=$(mktemp -d) \
- && cd "$TEMP_DIR" \
- && wget -q "https://github.com/jeremylong/DependencyCheck/releases/download/${LATEST_VERSION}/dependency-check-${LATEST_VERSION:1}-release.zip" \
- && unzip -q "dependency-check-${LATEST_VERSION:1}-release.zip" \
- && mv dependency-check /opt/ \
- && ln -sf /opt/dependency-check/bin/dependency-check.sh /usr/local/bin/dependency-check.sh \
- && cd - && rm -rf "$TEMP_DIR"
+    && wget -q "https://github.com/jeremylong/DependencyCheck/releases/download/${LATEST_VERSION}/dependency-check-${LATEST_VERSION:1}-release.zip" \
+    && unzip -q dependency-check-${LATEST_VERSION:1}-release.zip \
+    && mv dependency-check /opt/ \
+    && ln -sf /opt/dependency-check/bin/dependency-check.sh /usr/local/bin/dependency-check.sh \
+    && rm dependency-check-${LATEST_VERSION:1}-release.zip
+
+# Copy the application code
+COPY . .
+
+# Expose port for Flask app
+EXPOSE 5000
 
 # Create necessary directories
 RUN mkdir -p static/uploads static/reports templates
 
-# Copy sample component mapping and templates
-COPY component_mapping.csv ./component_mapping.csv
-COPY templates/ ./templates/
-
-# Expose Flask port
-EXPOSE 5000
-
-# Set default command
-CMD ["/bin/bash", "-c", ". .venv/bin/activate && python app.py"]
+# Set entrypoint
+CMD ["bash", "-c", "source /opt/venv/bin/activate && python app.py"]
