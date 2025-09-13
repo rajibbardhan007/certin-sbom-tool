@@ -1,16 +1,32 @@
 FROM python:3.13-slim
 
-# Install system dependencies for WeasyPrint, Grype, and OWASP Dependency-Check
-RUN apt-get update && apt-get install -y \
+# Update package lists and install basic dependencies first
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     unzip \
-    openjdk-17-jre-headless \
+    gnupg \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Add Debian backports repository for newer Java versions
+RUN echo "deb http://deb.debian.org/debian bookworm-backports main" > /etc/apt/sources.list.d/backports.list
+
+# Install Java 17 from backports and other dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    openjdk-17-jre-headless/bookworm-backports \
     libcairo2 \
     libpango-1.0-0 \
+    libpangocairo-1.0-0 \
     libgdk-pixbuf2.0-0 \
     libffi-dev \
     shared-mime-info \
     && rm -rf /var/lib/apt/lists/*
+
+# Create necessary directories
+RUN mkdir -p /app/static/uploads /app/static/reports
+
+# Set working directory
+WORKDIR /app
 
 # Install Python dependencies
 COPY requirements.txt .
@@ -30,6 +46,10 @@ RUN curl -LO https://github.com/jeremylong/DependencyCheck/releases/download/v${
 COPY app.py .
 COPY templates/ templates/
 COPY static/ static/
+
+# Create non-root user for security
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+USER appuser
 
 EXPOSE 5000
 CMD ["python", "app.py"]
