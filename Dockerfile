@@ -1,36 +1,30 @@
-FROM python:3.13-slim
+# Use a base image that already includes Java
+FROM eclipse-temurin:17-jre-jammy
 
-# Update package lists and install basic dependencies first
+# Install Python and other dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    python3-venv \
     curl \
     unzip \
-    gnupg \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
-
-# Add Debian backports repository for newer Java versions
-RUN echo "deb http://deb.debian.org/debian bookworm-backports main" > /etc/apt/sources.list.d/backports.list
-
-# Install Java 17 from backports and other dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    openjdk-17-jre-headless/bookworm-backports \
     libcairo2 \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libgdk-pixbuf2.0-0 \
     libffi-dev \
     shared-mime-info \
-    && rm -rf /var/lib/apt/lists/*
-
-# Create necessary directories
-RUN mkdir -p /app/static/uploads /app/static/reports
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s /usr/bin/python3 /usr/bin/python
 
 # Set working directory
 WORKDIR /app
 
-# Install Python dependencies
+# Copy requirements first for better caching
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Install Grype
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
@@ -41,6 +35,9 @@ RUN curl -LO https://github.com/jeremylong/DependencyCheck/releases/download/v${
     && unzip dependency-check-${DC_VERSION}-release.zip -d /opt \
     && rm dependency-check-${DC_VERSION}-release.zip \
     && ln -s /opt/dependency-check/bin/dependency-check.sh /usr/local/bin/dependency-check
+
+# Create necessary directories
+RUN mkdir -p /app/static/uploads /app/static/reports
 
 # Copy application code
 COPY app.py .
